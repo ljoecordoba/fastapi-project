@@ -41,11 +41,24 @@ async def users():
     return user_list
 
 
-
-@app.get("/users/{user_id}")
+#Path
+@app.get("/user/{user_id}")
 async def user(user_id: int):
     users_list_2 = filter(lambda user: user.id == user_id, user_list)
     try:
         return list(users_list_2)[0]
     except IndexError:
-        return {"message": "User not found"}
+        return {"error": "User not found"}
+
+#Query        
+@app.get("/user/")
+async def userquery(id: int):
+    return search_user(id)
+
+
+def search_user(id: int):
+    users = filter(lambda user: user.id == id, user_list)
+    try:
+        return list(users)[0]
+    except :
+        return {"error": "User not found"}
