@@ -60,7 +60,7 @@ async def user(user: User):
     if type(search_user(user.id)) == User:
         raise HTTPException(status_code=404, detail="User already exists")
     else:
-        user_list.routerend(user)
+        user_list.append(user)
         return user
 
 @router.put("/user/")
